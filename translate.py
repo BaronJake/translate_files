@@ -19,7 +19,7 @@ The first 500k characters every month are free as of 5/11/22 so it shouldn't inc
 Click the hambuger again, and hover over APIS and Services, and click Identifiers.
 Near the top of the screen, there is a button called Create Credentials. Click it.
 Create an API Key, and copy it into this script as the API_KEY variable
-Also need to install polib
+Also need to install  polib 
 """
 
 
