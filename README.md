@@ -2,10 +2,11 @@
 
 
 ### Requirements
-To install requirements:
+To install requirements to run script:
+* pip install -r requirements.txt
 
-*pip install -r requirements.txt      - for requirements to run scripts
-*pip install -r requirements-test.txt - for requirements to run tests (when written)
+To install requirements to run tests (when written)
+* pip install -r requirements-test.txt
 
 You'll also need to get a Google API_KEY:
 
