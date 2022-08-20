@@ -32,7 +32,7 @@ python translate.py -f <file_path> -s <source language>  -t <target language>
 
 In order to translate the included german.txt to english you can run:
 
-python translate.py -f german.txt -s de
+python scripts/translate.py -f german.txt -s de
 
 * de is the ISO-639-1 code for the German language https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 * English is the default for target
