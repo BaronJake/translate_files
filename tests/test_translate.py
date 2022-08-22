@@ -4,18 +4,13 @@ from scripts import translate
 
 
 class test_translate(TestCase):
-
     @patch("scripts.translate.requests.post")
     def test_translate(self, mock_request):
         """Should call Google Translate API"""
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = {
-            "data": {
-                "translations": [
-                    {"translatedText": "Igpay Atinlay"}
-                ]
-            }
+            "data": {"translations": [{"translatedText": "Igpay Atinlay"}]}
         }
         mock_request.return_value = mock_response
         with patch("scripts.translate.API_KEY", "fake_key"):
