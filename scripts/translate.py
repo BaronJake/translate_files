@@ -3,7 +3,7 @@ import os
 import requests
 import polib
 import argparse
-from config import API_KEY
+from resources.config import API_KEY
 
 
 def get_arguments():
