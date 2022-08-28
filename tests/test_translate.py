@@ -1,9 +1,12 @@
+"""Tests for translate script"""
 from unittest import TestCase
 from mock import patch, MagicMock
 from scripts import translate
 
 
-class test_translate(TestCase):
+class TestTranslate(TestCase):
+    """Tests for translate script"""
+
     @patch("scripts.translate.requests.post")
     def test_translate(self, mock_request):
         """Should call Google Translate API"""
@@ -26,7 +29,7 @@ class test_translate(TestCase):
         """Should get arguments from commandline"""
         pass
 
-    def test_error_no_API_KEY(self):
+    def test_error_no_key(self):
         """Should raise error if API_KEY not set"""
         pass
 
