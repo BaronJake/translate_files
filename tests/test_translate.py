@@ -21,22 +21,33 @@ class TestTranslate(TestCase):
         mock_request.assert_called_once()
         self.assertEqual(translated_text, "Igpay Atinlay")
 
-    def test_error_response(self):
+    @patch("scripts.translate.requests.post")
+    def test_error_response(self, mock_request):
         """Should raise error if error in response from API"""
-        pass
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "error": {"code": 1234546, "message": "Cannot Compute!"}
+        }
+        mock_request.return_value = mock_response
+        with patch("scripts.translate.API_KEY", "fake_key"):
+            with self.assertRaises(ValueError):
+                translate.translate_text("en", "zz", "Pig Latin")
 
-    def test_get_arguments(self):
-        """Should get arguments from commandline"""
-        pass
+    @patch("scripts.translate.requests.post")
+    def test_error_status_code(self, mock_request):
+        """Should raise error if Status code is not 200"""
+        mock_response = MagicMock()
+        mock_response.status_code = 403
+        mock_response.json.return_value = {
+            "data": {"translations": [{"translatedText": "Igpay Atinlay"}]}
+        }
+        mock_request.return_value = mock_response
+        with patch("scripts.translate.API_KEY", "fake_key"):
+            with self.assertRaises(ConnectionError):
+                translate.translate_text("en", "zz", "Pig Latin")
 
     def test_error_no_key(self):
         """Should raise error if API_KEY not set"""
-        pass
-
-    def test_txt_file_translation(self):
-        """Should read text from txt file and run translation"""
-        pass
-
-    def test_po_file_translation(self):
-        """Should read text from po files and run translation"""
-        pass
+        with self.assertRaises(ValueError):
+            translate.get_arguments()

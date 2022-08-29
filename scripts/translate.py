@@ -40,7 +40,10 @@ def translate_text(source, target, text):
     response = requests.post(
         f"https://translation.googleapis.com/language/translate/v2?key={API_KEY}",
         data=data,
-    ).json()
+    )
+    if response.status_code != 200:
+        raise ConnectionError(f"Status code: {response.status_code}")
+    response = response.json()
     if "error" in response:
         raise ValueError(
             f"Error status with status code: "
@@ -60,9 +63,9 @@ def start_translation(arguments):
         path = os.getcwd()
     file_name, file_ext = file.split("/")[-1].split(".")
     if file_ext != ".po":
-        with open(file, "r") as original_file:
+        with open(file, "r", encoding="utf-8") as original_file:
             original_data = original_file.read().split("\n")
-        with open(f"{path}/{file_name}_{target}.{file_ext}", "w") as outfile:
+        with open(f"{path}/{file_name}_{target}.{file_ext}", "w", encoding="utf-8") as outfile:
             for line in original_data:
                 translated_text = translate_text(source, target, line)
                 outfile.write(f"{translated_text}\n")

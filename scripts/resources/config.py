@@ -1,0 +1,2 @@
+"""Secrets"""
+API_KEY = ""
