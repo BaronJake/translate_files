@@ -1,2 +1,0 @@
-"""Secrets"""
-API_KEY = ""
