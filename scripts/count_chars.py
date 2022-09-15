@@ -25,7 +25,7 @@ def count_chars(arguments):
         path = os.getcwd()
     _, file_ext = file.split("/")[-1].split(".")
     if file_ext != ".po":
-        with open(file, "r", encoding="utf-8") as original_file:
+        with open(file, "r", encoding="utf-16") as original_file:
             original_data = original_file.read().split("\n")
         for line in original_data:
             num_chars += len(line)
