@@ -1,3 +1,4 @@
+easyocr
 mock
 polib
 pytest

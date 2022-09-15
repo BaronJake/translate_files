@@ -49,7 +49,7 @@ def translate_text(source, target, text):
             if response.status_code != 200:
                 raise ConnectionError(f"Status code: {response.status_code}")
             break
-        except:
+        except Exception:
             retry_counter += 1
             time.sleep(retry_counter * 5)
             print(f"Connection Error, retrying after {retry_counter * 5} seconds")
@@ -75,11 +75,11 @@ def start_translation(arguments):
         path = os.getcwd()
     file_name, file_ext = file.split("/")[-1].split(".")
     if file_ext != ".po":
-        with open(file, "r", encoding="utf-8") as original_file:
+        with open(file, "r", encoding="utf-16") as original_file:
             original_data = original_file.read().split("\n")
         num_lines = len(original_data)
         print(f"Number of lines to translate {num_lines}")
-        with open(f"{'/'.join(file.split('/')[:-1])}/{file_name}_{target}.{file_ext}", "a", encoding="utf-8") as outfile:
+        with open(f"{'/'.join(file.split('/')[:-1])}/{file_name}_{target}.{file_ext}", "a", encoding="utf-16") as outfile:
             for line_num, line in enumerate(original_data):
                 print(f"Sending line {line_num + 1}/{num_lines}")
                 # TODO regex match lines with just special characters and skip translation request for those
